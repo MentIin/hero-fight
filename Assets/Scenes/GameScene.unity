@@ -1916,6 +1916,8 @@ MonoBehaviour:
   blueHero: {fileID: 0}
   redHero: {fileID: 0}
   gameEndText: {fileID: 900392739}
+  blueMovement: {fileID: 0}
+  redMovement: {fileID: 0}
   blueHealthbar: {fileID: 314245474}
   redHealthbar: {fileID: 215980567}
   blueSkillButon: {fileID: 1394573489}
