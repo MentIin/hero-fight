@@ -13,14 +13,15 @@ public class HatmanHat : MonoBehaviour
 
     private float speed = 4f;
 
-    private float lifetimeAfterHit = 10f;
+    private float lifetime = 5f;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        Vector2 force = transform.right * speed;
+        Vector2 force = transform.right * (speed * 0.7f) + (transform.up * 0.3f);
         rb.AddForce(force, ForceMode2D.Impulse);
+        StartCoroutine(Die(lifetime));
     }
 
     // Update is called once per frame
@@ -37,7 +38,7 @@ public class HatmanHat : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Die(lifetimeAfterHit));
+            
         }
         
     }

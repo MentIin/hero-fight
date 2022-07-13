@@ -223,9 +223,9 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 2b7e354113d72de4bbffbc2d02e13076, type: 3}
   hitSound: {fileID: 0}
   speed: 3
-  jumpForce: 14
+  jumpForce: 16
   isOnGround: 0
-  skillCountdown: 3
+  skillCountdown: 5
   skillCountdownTick: 0
   maxHeatpoints: 3
   heatpoints: 3
