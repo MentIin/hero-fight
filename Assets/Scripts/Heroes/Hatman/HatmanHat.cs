@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HatmanHat : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem particles;
     private Rigidbody2D rb;
 
     private float timeFromSpawn=0f;
@@ -45,6 +46,9 @@ public class HatmanHat : MonoBehaviour
 
     void Die()
     {
+        particles.transform.parent = null;
+        Destroy(particles.gameObject, 1f);
+        particles.Play();
         Destroy(this.gameObject);
     }
 

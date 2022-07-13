@@ -195,6 +195,7 @@ public class HeroMovement : MonoBehaviour
             //_sprite.flipX = true;
             transform.Rotate(Vector3.up, 180f);
         }
+        transform.Translate(Vector2.right * 0.1f);
 
     }
     public void StartMove()
@@ -275,12 +276,9 @@ public class HeroMovement : MonoBehaviour
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Hero"))
-        {ChangeDirection();
-            if (GameManager.S.blueMovement.xDirection != GameManager.S.redMovement.xDirection)
-            {
-                
-                
-            }
+        {
+            if (Random.value >= 0.1f) ChangeDirection();
+
         }
     }
 
