@@ -272,11 +272,15 @@ public class HeroMovement : MonoBehaviour
             return stunnedTimeTick > 0;
         }
     }
-    void OnCollisionStay2D(Collision2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Hero"))
         {
-            ChangeDirection();
+            if (GameManager.S.blueMovement.xDirection != GameManager.S.redMovement.xDirection)
+            {
+                ChangeDirection();
+                
+            }
         }
     }
 

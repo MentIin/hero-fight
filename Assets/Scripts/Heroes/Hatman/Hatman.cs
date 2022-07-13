@@ -25,5 +25,6 @@ public class Hatman : HeroMovement
         GameObject hat = Instantiate(hatmanHat, hatmanHatSpawnPoint.position, transform.rotation);
         HatmanHat script = hat.GetComponent<HatmanHat>();
         script.red = red;
+        Physics2D.IgnoreCollision(hat.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 }

@@ -11,7 +11,9 @@ public class HatmanHat : MonoBehaviour
 
     public bool red;
 
-    private float speed=6;
+    private float speed = 4f;
+
+    private float lifetimeAfterHit = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,7 @@ public class HatmanHat : MonoBehaviour
         }
         else
         {
-            Die();
+            StartCoroutine(Die(lifetimeAfterHit));
         }
         
     }
@@ -43,5 +45,11 @@ public class HatmanHat : MonoBehaviour
     void Die()
     {
         Destroy(this.gameObject);
+    }
+
+    IEnumerator Die(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Die();
     }
 }

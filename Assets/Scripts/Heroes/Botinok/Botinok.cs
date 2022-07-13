@@ -25,15 +25,21 @@ public class Botinok : HeroMovement
         particle.Play();
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
+    protected void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Hero")){
             if (!isDashing){
-                //DontAttack(other.gameObject);
+                
             }else{
                 Attack(other.gameObject);
             }
         }
     }
+
+    protected override void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!isDashing) base.OnCollisionStay2D(collision);
+    }
+
     void DontAttack(GameObject hero){
         Rigidbody2D colRb = hero.GetComponent<Rigidbody2D>();
         HeroMovement heroScript = hero.GetComponent<HeroMovement>();

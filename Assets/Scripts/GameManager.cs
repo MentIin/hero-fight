@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject blueHero;
     public GameObject redHero;
     public GameObject gameEndText;
-    private HeroMovement blueMovement;
-    private HeroMovement redMovement;
+    public HeroMovement blueMovement;
+    public HeroMovement redMovement;
     public Image blueHealthbar;
     public Image redHealthbar;
     public GameObject blueSkillButon;
