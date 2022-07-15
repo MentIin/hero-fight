@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HatmanHat : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particles;
+    private Animator _anim;
     private Rigidbody2D rb;
 
     private float timeFromSpawn=0f;
@@ -15,9 +15,11 @@ public class HatmanHat : MonoBehaviour
     private float speed = 4f;
 
     private float lifetime = 5f;
+    
     // Start is called before the first frame update
     void Start()
     {
+        _anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         Vector2 force = transform.right * (speed * 0.7f) + (transform.up * 0.3f);
@@ -26,11 +28,13 @@ public class HatmanHat : MonoBehaviour
     }
 
     // Update is called once per frame
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.collider.CompareTag("Hero"))
+        
+        if (col.CompareTag("Hero"))
         {
-            HeroMovement script = collision.collider.gameObject.GetComponent<HeroMovement>();
+            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), col);
+            HeroMovement script = col.gameObject.GetComponent<HeroMovement>();
             if (script.red != red)
             {
                 script.GetDamage(1);
@@ -43,13 +47,14 @@ public class HatmanHat : MonoBehaviour
         }
         
     }
+    
 
     void Die()
     {
-        particles.transform.parent = null;
-        Destroy(particles.gameObject, 1f);
-        particles.Play();
-        Destroy(this.gameObject);
+        rb.velocity = rb.velocity * 0.7f;
+        _anim.SetBool("shading", true);
+
+        Destroy(this.gameObject, 1f);
     }
 
     IEnumerator Die(float time)
