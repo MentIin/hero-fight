@@ -33,7 +33,7 @@ public class BonusLighting : Bonus
                 }
                 else
                 {
-                    print("qwer");
+                    
                 }
             }
             

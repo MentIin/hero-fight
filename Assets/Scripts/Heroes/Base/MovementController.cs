@@ -8,6 +8,10 @@ public class MovementController : MonoBehaviour
     public GameObject heroRed;
     public HeroMovement heroBlueMovement;
     public HeroMovement heroRedMovement;
+
+    private Rigidbody2D blueHeroRb;
+
+    private Rigidbody2D redHeroRb;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,12 @@ public class MovementController : MonoBehaviour
     public void BlueHeroUseSkill()
     {
         heroBlueMovement.UseSkill();
+    }
+    
+
+    public void RedHeroStopJump()
+    {
+        
     }
     public void RedHeroJump()
     {

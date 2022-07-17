@@ -29,7 +29,7 @@ public class HeroMovement : MonoBehaviour
     protected int layerMask;
     protected float originalSpeed;
     private int deafulLayer;
-    protected float lastClickOnJumpButton=0f;
+    [HideInInspector]public  float lastClickOnJumpButton=0f;
     private float skillCooldownBoostSec=0f;
     public int heroId=-1;
     // Start is called before the first frame update
@@ -252,27 +252,7 @@ public class HeroMovement : MonoBehaviour
     {
         _sprite.color = new Color(_sprite.color.r, _sprite.color.g, _sprite.color.b, a);
     }
-    public bool canMove
-    {
-        get
-        {
-            return isMoving && !isStunned;
-        }
-    }
-    public bool isImmortal
-    {
-        get
-        {
-            return immortalTimeTick > 0;
-        }
-    }
-    public bool isStunned
-    {
-        get
-        {
-            return stunnedTimeTick > 0;
-        }
-    }
+    
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Hero"))
@@ -284,9 +264,33 @@ public class HeroMovement : MonoBehaviour
 
     
     virtual public void EndJump(){
-        
+        if (_rb.velocity.y > 1f && !isOnGround && lastClickOnJumpButton > 9.5f)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y / 1.5f);
+        }
     }
     public void SpeedUpSkillCooldown(float sec){
         skillCooldownBoostSec = sec;
     }
+    public bool canMove
+         {
+             get
+             {
+                 return isMoving && !isStunned;
+             }
+         }
+         public bool isImmortal
+         {
+             get
+             {
+                 return immortalTimeTick > 0;
+             }
+         }
+         public bool isStunned
+         {
+             get
+             {
+                 return stunnedTimeTick > 0;
+             }
+         }
 }
