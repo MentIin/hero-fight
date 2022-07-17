@@ -22,9 +22,11 @@ public class HatmanHat : MonoBehaviour
         _anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        Vector2 force = transform.right * (speed * 0.7f) + (transform.up * 0.3f);
+        Vector2 force = transform.right * (speed * 0.8f) + (transform.up * 0.2f);
         rb.AddForce(force, ForceMode2D.Impulse);
         StartCoroutine(Die(lifetime));
+
+        rb.gravityScale = 0.05f;
     }
 
     // Update is called once per frame
@@ -47,7 +49,12 @@ public class HatmanHat : MonoBehaviour
         }
         
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        rb.gravityScale = 0.4f;
+    }
+
 
     void Die()
     {

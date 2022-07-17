@@ -21,7 +21,7 @@ public class Hatman : HeroMovement
 
     IEnumerator SpawnHat()
     {
-        yield return new WaitForSeconds(0.835f);
+        yield return new WaitForSeconds(0.435f);
         GameObject hat = Instantiate(hatmanHat, hatmanHatSpawnPoint.position, transform.rotation);
         HatmanHat script = hat.GetComponent<HatmanHat>();
         script.red = red;
