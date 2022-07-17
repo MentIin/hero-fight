@@ -12,6 +12,7 @@ TagManager:
   - HeroSpawnPoint
   - Bonus
   - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX
