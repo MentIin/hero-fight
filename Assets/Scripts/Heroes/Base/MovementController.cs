@@ -12,12 +12,20 @@ public class MovementController : MonoBehaviour
     void Start()
     {
         heroBlueMovement = heroBlue.GetComponent<HeroMovement>();
-        heroRedMovement = heroRed.GetComponent<HeroMovement>();
+        if (mode == 0)
+        {
+            heroRedMovement = heroRed.GetComponent<HeroMovement>();
+        }
+        
     }
     public void StartGame()
     {
         heroBlueMovement.StartMove();
-        heroRedMovement.StartMove();
+        if (mode == 0)
+        {
+            heroRedMovement.StartMove();
+        }
+        
     }
 
     // Update is called once per frame
@@ -65,5 +73,13 @@ public class MovementController : MonoBehaviour
     public void RedStopJump()
     {
         heroRedMovement.EndJump();
+    }
+
+    private int mode
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("mode");
+        }
     }
 }

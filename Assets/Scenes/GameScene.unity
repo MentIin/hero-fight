@@ -227,7 +227,7 @@ RectTransform:
   m_Children:
   - {fileID: 30039286}
   m_Father: {fileID: 2108766167}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1592,7 +1592,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2108766167}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2001,7 +2001,9 @@ MonoBehaviour:
   blueHealthbar: {fileID: 314245474}
   redHealthbar: {fileID: 215980567}
   blueSkillButon: {fileID: 1394573489}
-  redSkillButton: {fileID: 1513026385}
+  redSkillButton: {fileID: 1825651497}
+  blueJumpButton: {fileID: 187612333}
+  redJumpButton: {fileID: 588934345}
   bonusesCount: 0
   blueHeroSpawnpoint: {fileID: 0}
   redHeroSpawnpoint: {fileID: 0}
@@ -2317,12 +2319,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2108766167}
-  m_RootOrder: 7
+  m_Father: {fileID: 1825651502}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -57, y: -52}
+  m_AnchoredPosition: {x: -45.00005, y: -45.000008}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1513026387
@@ -2709,13 +2711,14 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1513026386}
   m_Father: {fileID: 2108766167}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -57, y: -52}
+  m_AnchoredPosition: {x: -57, y: -51.99998}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1846494519
@@ -2932,7 +2935,6 @@ RectTransform:
   - {fileID: 585209783}
   - {fileID: 405708768}
   - {fileID: 1825651502}
-  - {fileID: 1513026386}
   - {fileID: 900392740}
   - {fileID: 134956644}
   m_Father: {fileID: 1253539381}

@@ -14,8 +14,6 @@ public class SkilButton : MonoBehaviour
     private Button button;
     void Awake()
     {
-
-
         image = GetComponent<Image>();
         button = GetComponent<Button>();
     }

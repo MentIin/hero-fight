@@ -10,48 +10,96 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] maps;
     public GameObject[] heroes;
-    public float secondsWaintForstart=2f;
+    [HideInInspector]public float secondsWaintForstart=2f;
     public MovementController movementController;
     public GameObject menuCanvas;
-    public GameObject[] bonuses;
+    [HideInInspector]public GameObject[] bonuses;
     public Transform[] bonusesSpawnPoints;
-    public GameObject blueHero;
-    public GameObject redHero;
+    [HideInInspector]public GameObject blueHero;
+    [HideInInspector]public GameObject redHero;
     public GameObject gameEndText;
-    public HeroMovement blueMovement;
-    public HeroMovement redMovement;
+    [HideInInspector]public HeroMovement blueMovement;
+    [HideInInspector]public HeroMovement redMovement;
     public Image blueHealthbar;
     public Image redHealthbar;
     public GameObject blueSkillButon;
     public GameObject redSkillButton;
+    public GameObject blueJumpButton;
+    public GameObject redJumpButton;
     public static GameManager S;
-    public int bonusesCount=0;
-    public Transform blueHeroSpawnpoint;
-    public Transform redHeroSpawnpoint;
+    [HideInInspector]public int bonusesCount=0;
+    [HideInInspector]public Transform blueHeroSpawnpoint;
+    [HideInInspector]public Transform redHeroSpawnpoint;
     public Diamond blueDiamond;
     public Diamond redDiamond;
     private AudioSource audioSource;
     void Awake()
     {
+        S = this;
+        audioSource = GetComponent<AudioSource>();
+        
         GameObject map = maps[PlayerPrefs.GetInt("level_id")];
         Instantiate(map, map.transform.position, map.transform.rotation);
+        
         FindSpawnPoints();
+        if (PlayerPrefs.GetInt("mode") == 1)
+        {
+            SetUpSoloGame();
+        }
+        else
+        {
+            SetUp2PGame();
+        }
+
+        ContinueGame();
+    }
+
+    void SetUp2PGame()
+    {
         GameObject blueHeroPref = heroes[PlayerPrefs.GetInt("blue_hero_choice")];
         GameObject redHeroPref = heroes[PlayerPrefs.GetInt("red_hero_choice")];
+        
         blueHero = Instantiate(blueHeroPref, blueHeroSpawnpoint);
         redHero = Instantiate(redHeroPref, redHeroSpawnpoint);
+        
         blueMovement = blueHero.GetComponent<HeroMovement>();
         redMovement = redHero.GetComponent<HeroMovement>();
-        S = this;
+        
         blueSkillButon.GetComponent<SkilButton>().myHero = blueMovement;
         redSkillButton.GetComponent<SkilButton>().myHero = redMovement;
+        
         movementController.heroBlue = blueHero;
         movementController.heroRed = redHero;
+        
         redMovement.red = true;
+        
         blueDiamond.hero = blueHero;
         redDiamond.hero = redHero;
-        audioSource = GetComponent<AudioSource>();
-        ContinueGame();
+    }
+
+    void SetUpSoloGame()
+    {
+        // only blue
+        GameObject blueHeroPref = heroes[PlayerPrefs.GetInt("blue_hero_choice")];
+
+        blueHero = Instantiate(blueHeroPref, blueHeroSpawnpoint);
+
+        blueMovement = blueHero.GetComponent<HeroMovement>();
+
+        blueSkillButon.GetComponent<SkilButton>().myHero = blueMovement;
+
+        movementController.heroBlue = blueHero;
+        
+        blueDiamond.hero = blueHero;
+        
+        DestroyImmediate(redDiamond.gameObject);
+        DestroyImmediate(redHealthbar.transform.parent.gameObject);
+        DestroyImmediate(redSkillButton.gameObject);
+        DestroyImmediate(redJumpButton.gameObject);
+        
+        
+        
+
     }
 
 
@@ -81,7 +129,11 @@ public class GameManager : MonoBehaviour
     {
 
         blueHealthbar.fillAmount =  (float)blueMovement.heatpoints / (float)blueMovement.maxHeatpoints;
-        redHealthbar.fillAmount =  (float)redMovement.heatpoints / (float)redMovement.maxHeatpoints;
+        if (mode == 0)
+        {
+            redHealthbar.fillAmount =  (float)redMovement.heatpoints / (float)redMovement.maxHeatpoints;
+        }
+        
     }
 
     public void GameEnd(bool red){
@@ -126,5 +178,13 @@ public class GameManager : MonoBehaviour
     }
     public void ReturnToMainMenu(){
         SceneManager.LoadScene("MainMenu");
+    }
+    
+    private int mode
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("mode");
+        }
     }
 }
