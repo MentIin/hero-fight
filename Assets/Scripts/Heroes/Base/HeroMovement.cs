@@ -279,18 +279,18 @@ public class HeroMovement : MonoBehaviour
                  return isMoving && !isStunned;
              }
          }
-         public bool isImmortal
+     public bool isImmortal
+     {
+         get
          {
-             get
-             {
-                 return immortalTimeTick > 0;
-             }
+             return immortalTimeTick > 0;
          }
-         public bool isStunned
+     }
+     public bool isStunned
+     {
+         get
          {
-             get
-             {
-                 return stunnedTimeTick > 0;
-             }
+             return stunnedTimeTick > 0;
          }
+     }
 }

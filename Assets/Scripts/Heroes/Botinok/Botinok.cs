@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,8 @@ public class Botinok : HeroMovement
         particle.Play();
     }
 
-    protected void OnCollisionEnter2D(Collision2D other) {
+    protected void OnCollisionEnter2D(Collision2D other)
+    {
         if (other.gameObject.CompareTag("Hero")){
             if (!isDashing){
                 
@@ -65,9 +67,22 @@ public class Botinok : HeroMovement
     }
     public override void ChangeDirection()
     {
+        if (particle.isPlaying)
+        {
+            particle.transform.Rotate(Vector3.up, 180f);
+        }
+        particle.Stop();
         base.ChangeDirection();
         if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "botinok_dash"){
             animator.SetTrigger("startRun");
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (!particle.isPlaying)
+        {
+            particle.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
         }
     }
 }
