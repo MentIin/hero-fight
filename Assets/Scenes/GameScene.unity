@@ -2001,7 +2001,7 @@ MonoBehaviour:
   blueHealthbar: {fileID: 314245474}
   redHealthbar: {fileID: 215980567}
   blueSkillButon: {fileID: 1394573489}
-  redSkillButton: {fileID: 1825651497}
+  redSkillButton: {fileID: 1513026385}
   blueJumpButton: {fileID: 187612333}
   redJumpButton: {fileID: 588934345}
   bonusesCount: 0

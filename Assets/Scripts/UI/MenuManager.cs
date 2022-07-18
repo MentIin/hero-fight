@@ -45,6 +45,12 @@ public class MenuManager : MonoBehaviour
     public void StartGame(){
         PlayerPrefs.SetInt("blue_hero_choice", bluePick);
         PlayerPrefs.SetInt("red_hero_choice", redPick);
+        PlayerPrefs.SetInt("mode", 0); // 2players
+        SceneManager.LoadScene("GameScene");
+}
+    public void StartSoloGame(){
+        PlayerPrefs.SetInt("blue_hero_choice", bluePick);
+        PlayerPrefs.SetInt("mode", 1); // solo mode
         SceneManager.LoadScene("GameScene");
     }
     public void BlueChange(){

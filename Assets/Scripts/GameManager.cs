@@ -48,8 +48,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SetUp2PGame();
+           SetUp2PGame();
         }
+        //SetUp2PGame();
 
         ContinueGame();
     }
@@ -61,16 +62,16 @@ public class GameManager : MonoBehaviour
         
         blueHero = Instantiate(blueHeroPref, blueHeroSpawnpoint);
         redHero = Instantiate(redHeroPref, redHeroSpawnpoint);
+
+        movementController.heroBlue = blueHero;
+        movementController.heroRed = redHero;
         
         blueMovement = blueHero.GetComponent<HeroMovement>();
         redMovement = redHero.GetComponent<HeroMovement>();
         
         blueSkillButon.GetComponent<SkilButton>().myHero = blueMovement;
         redSkillButton.GetComponent<SkilButton>().myHero = redMovement;
-        
-        movementController.heroBlue = blueHero;
-        movementController.heroRed = redHero;
-        
+
         redMovement.red = true;
         
         blueDiamond.hero = blueHero;

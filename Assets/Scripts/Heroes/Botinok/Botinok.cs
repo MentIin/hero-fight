@@ -7,20 +7,19 @@ public class Botinok : HeroMovement
 {
     public ParticleSystem particle;
     public int damage=1;
-    private float forcePower=12f;
+    private float forcePower=1200f;
     public AudioClip skillSound;
     void Awake()
     {
         heroId = 1;
         maxHeatpoints = 4;
         heatpoints = maxHeatpoints;
-        skillCountdown = 3;
+        skillCountdown = 5f;
         
     }
     override public void Skill()
     {
-        float dashForce = 13f;
-        _rb.velocity = (Vector2.right * dashForce * xDirection);
+        _rb.AddForce(Vector2.right * forcePower * xDirection);
         animator.SetTrigger("dash");
         audioSource.PlayOneShot(skillSound);
         particle.Play();
@@ -50,6 +49,7 @@ public class Botinok : HeroMovement
         transform.Translate(Vector3.right * 0.01f + Vector3.up * 0.01f);
     }
     void Attack(GameObject hero){
+        particle.Stop();
 
         Rigidbody2D colRb = hero.GetComponent<Rigidbody2D>();
         Vector2 force = (hero.transform.position - (hero.transform.position + Vector3.down)).normalized * forcePower;
