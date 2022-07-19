@@ -23,7 +23,11 @@ public class Spring : MonoBehaviour
     void Push(GameObject target){
         audioSource.Play();
         anim.SetTrigger("activate");
+
         Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
+        
+        rb.velocity = Vector2.zero;
+        
         Vector3 force = (direction.position - transform.position).normalized * power;
         rb.AddForce(force, ForceMode2D.Impulse);
         if (changeDirection)

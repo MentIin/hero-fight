@@ -128,6 +128,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.T))
+        {
+            Time.timeScale = 0.1f;
+        }else
+        {
+            Time.timeScale = 1f;
+        }
+        
 
         blueHealthbar.fillAmount =  (float)blueMovement.heatpoints / (float)blueMovement.maxHeatpoints;
         if (mode == 0)

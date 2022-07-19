@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,7 +50,19 @@ public class HeroMovement : MonoBehaviour
             gameObject.layer = 11;
         }
         audioSource = GetComponent<AudioSource>();
-        layerMask = LayerMask.GetMask("Default");
+
+        string[] groundLayers = new string[2];
+        if (red)
+        {
+            groundLayers = new string[] {"Default", "Blue"};
+        }
+        else
+        {
+            groundLayers = new string[] {"Default", "Red"};
+        }
+        
+        layerMask = LayerMask.GetMask(groundLayers);
+        
         if (red)
         {
             transform.Rotate(Vector2.up, 180f);
@@ -117,7 +130,11 @@ public class HeroMovement : MonoBehaviour
         
     }
     virtual public void Move(){
-        transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        if (_rb.velocity.x * xDirection < speed)
+        {
+            _rb.velocity = new Vector2(speed * xDirection, _rb.velocity.y);
+        }
+        //transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
     }
     public void GetDamage(int damage)
     {
@@ -166,7 +183,11 @@ public class HeroMovement : MonoBehaviour
 
         if (hit.collider != null)
         {
-            if (hit.collider.tag == ("Ground") || hit.collider.tag == "Platform")
+            
+            string[] groundTags = new string[] {"Ground", "Platform", "Hero"};
+            var hash = new HashSet<string>(groundTags);
+            
+            if (hash.Contains(hit.collider.tag) )
             {
                 isOnGround = true;
             }
@@ -185,16 +206,9 @@ public class HeroMovement : MonoBehaviour
     }
     public virtual void ChangeDirection()
     {
+       
         xDirection *= -1;
-        if (xDirection == 1)
-        {
-            transform.Rotate(Vector3.up, 180f);
-        }
-        else
-        {
-            //_sprite.flipX = true;
-            transform.Rotate(Vector3.up, 180f);
-        }
+        transform.Rotate(Vector3.up, 180f);
         transform.Translate(Vector2.right * 0.1f);
 
     }
@@ -213,6 +227,8 @@ public class HeroMovement : MonoBehaviour
         lastClickOnJumpButton = 0f;
         if (canMove && isOnGround)
         {
+            _rb.velocity = new Vector2(_rb.velocity.x, 0f);
+        
             if (jumpSound != null) audioSource.PlayOneShot(jumpSound);
             lastClickOnJumpButton = 10f;
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -253,16 +269,27 @@ public class HeroMovement : MonoBehaviour
         _sprite.color = new Color(_sprite.color.r, _sprite.color.g, _sprite.color.b, a);
     }
     
-    protected virtual void OnCollisionStay2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Hero"))
         {
-            if (Random.value >= 0.1f) ChangeDirection();
-
+            if (Mathf.Abs(transform.position.y - collision.gameObject.transform.position.y) < 0.5f)
+            {
+                ChangeDirection();
+                //if (Random.value >= 0.01f)
+                
+                collision.rigidbody.AddForce(Vector2.right, ForceMode2D.Impulse);
+                //collision.gameObject.GetComponent<HeroMovement>().ChangeDirection();
+            }
         }
     }
 
-    
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        OnCollisionEnter2D(collision);
+    }
+
+
     virtual public void EndJump(){
         if (_rb.velocity.y > 1f && !isOnGround && lastClickOnJumpButton > 9.5f)
         {
@@ -279,14 +306,14 @@ public class HeroMovement : MonoBehaviour
                  return isMoving && !isStunned;
              }
          }
-     public bool isImmortal
+    public bool isImmortal
      {
          get
          {
              return immortalTimeTick > 0;
          }
      }
-     public bool isStunned
+    public bool isStunned
      {
          get
          {
