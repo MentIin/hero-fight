@@ -231,6 +231,7 @@ MonoBehaviour:
   heatpoints: 3
   isMoving: 0
   xDirection: 1
+  lastClickOnJumpButton: 0
   heroId: 2
   hatmanHat: {fileID: 2152785575032287549, guid: 0a9f1d34bf1f172418ea552e6de1115d,
     type: 3}
@@ -263,7 +264,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4913753489809855939}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 97695433d87987b4087a9c4982b32bf0, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -294,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8646990685246863994}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.05, z: 0}
+  m_LocalPosition: {x: 0.4, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4913753489809855941}

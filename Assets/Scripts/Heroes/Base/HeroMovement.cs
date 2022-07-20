@@ -155,7 +155,7 @@ public class HeroMovement : MonoBehaviour
     }
     virtual protected void CheckToward()
     {
-        Vector2 offset = new Vector2(xDirection * (_collider.radius + 0.1f), 0);
+        Vector2 offset = new Vector2(xDirection * (_collider.radius + 0.2f), 0);
         Vector2 origin = new Vector2(transform.position.x, transform.position.y);
         Vector2 dir = Vector2.right * xDirection;
         float distance = speed / 60 + _collider.radius;
@@ -178,7 +178,7 @@ public class HeroMovement : MonoBehaviour
     {
         Vector2 origin = new Vector2(transform.position.x, transform.position.y);
         Vector2 dir = Vector2.down;
-        float distance = 0.1f + _collider.radius;
+        float distance = 0.2f + _collider.radius;
         RaycastHit2D hit = Physics2D.Raycast(origin, dir, distance, layerMask);
 
         if (hit.collider != null)
