@@ -41,7 +41,7 @@ public class HatmanHat : MonoBehaviour
         {
             Physics2D.IgnoreCollision(col, collider);
             HeroMovement script = collider.gameObject.GetComponent<HeroMovement>();
-            if (script.red != red)
+            if (script.red != red && !script.isImmortal)
             {
                 script.GetDamage(1);
                 Die();

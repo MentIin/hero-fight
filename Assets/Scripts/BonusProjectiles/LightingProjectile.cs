@@ -7,20 +7,23 @@ using UnityEngine.PlayerLoop;
 public class LightingProjectile : MonoBehaviour
 {
     public GameObject lighting;
+    [SerializeField] private AudioSource _audio;
     private int lightingNum = 7;
     private BoxCollider2D collider;
     public bool red;
+    private float lifetime = 0.1f;
 
     private void Start()
     {
         collider = GetComponent<BoxCollider2D>();
         SpawnLighting();
         Damage();
-        Destroy(this.gameObject, 0.1f);
+        Destroy(this.gameObject, 1.5f);
     }
 
     void SpawnLighting()
     {
+        //_audio.PlayOneShot(_audio.clip);
         for (int i = 0; i < lightingNum; i++)
         {
             var pos = transform.position + transform.right * (21.875f / lightingNum * ( i));
@@ -30,7 +33,12 @@ public class LightingProjectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Damage();
+        lifetime -= Time.fixedDeltaTime;
+        if (lifetime > 0f)
+        {
+            Damage();
+        }
+        
     }
 
     void Damage()

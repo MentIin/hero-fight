@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class HeroMovement : MonoBehaviour
@@ -146,7 +147,7 @@ public class HeroMovement : MonoBehaviour
         {
             Die();
         }
-        ImmportalityOn();
+        ImmortalityOn();
     }
     public void Die()
     {
@@ -210,8 +211,25 @@ public class HeroMovement : MonoBehaviour
         xDirection *= -1;
         transform.Rotate(Vector3.up, 180f);
         transform.Translate(Vector2.right * 0.1f);
-
     }
+
+    public void SetDirection(float x)
+    {
+        if (x < 0)
+        {
+            xDirection = 1;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            xDirection = -1;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            
+        }
+        
+        transform.Translate(Vector2.right * 0.1f);
+    }
+
     public void StartMove()
     {
         isMoving = true;
@@ -247,13 +265,13 @@ public class HeroMovement : MonoBehaviour
     {
 
     }
-    public void ImmportalityOn()
+    public void ImmortalityOn()
     {
         immortalTimeTick = immortalTime;
         animator.SetBool("stunned", true);
         gameObject.layer = 8; //immortal
     }
-    public void ImmportalityOn(float time, bool stunned) 
+    public void ImmortalityOn(float time, bool stunned) 
     {
         immortalTimeTick = time;
         if (stunned)
@@ -275,7 +293,8 @@ public class HeroMovement : MonoBehaviour
         {
             if (Mathf.Abs(transform.position.y - collision.gameObject.transform.position.y) < 0.5f)
             {
-                ChangeDirection();
+                SetDirection(collision.collider.transform.position.x - transform.position.x);
+                //ChangeDirection();
                 //if (Random.value >= 0.01f)
                 
                 collision.rigidbody.AddForce(Vector2.right, ForceMode2D.Impulse);

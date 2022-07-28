@@ -221,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   red: 0
   jumpSound: {fileID: 8300000, guid: 2b7e354113d72de4bbffbc2d02e13076, type: 3}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 3b7498770c9e4d84ca45cc9b16e42487, type: 3}
   speed: 3
   jumpForce: 16
   isOnGround: 0

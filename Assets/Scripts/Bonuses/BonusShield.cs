@@ -9,7 +9,7 @@ public class BonusShield : Bonus
     {
         base.ActivateBonus(hero);
         HeroMovement script = hero.GetComponent<HeroMovement>();
-        script.ImmportalityOn(5f, false);
+        script.ImmortalityOn(5f, false);
         
         //GameObject shldEf = Instantiate(shieldsEffect, shieldsEffect.transform.position, shieldsEffect.transform.rotation);
         //shldEf.GetComponent<ShieldsEffect>().target = hero.transform;
